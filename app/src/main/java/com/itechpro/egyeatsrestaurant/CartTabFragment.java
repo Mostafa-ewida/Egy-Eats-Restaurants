@@ -2,6 +2,7 @@ package com.itechpro.egyeatsrestaurant;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -121,7 +122,7 @@ public class CartTabFragment extends Fragment {
         edtAddress.setLayoutParams(oneP);
         alertDialog.setView(edtAddress);
         alertDialog.setIcon(R.drawable.ic_baseline_shopping_cart_24);
-        alertDialog.setPositiveButton(Common.appLocale.getLanguage().equals("ar")?"نعم":"YES", new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton(Common.appLocale.getLanguage().equals("ar")?"تأكيد":"Confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Request request = new Request(
@@ -157,7 +158,7 @@ public class CartTabFragment extends Fragment {
             }
         });
 
-        alertDialog.setNegativeButton(Common.appLocale.getLanguage().equals("ar")?"لا":"NO", new DialogInterface.OnClickListener() {
+        alertDialog.setNegativeButton(Common.appLocale.getLanguage().equals("ar")?"إلغاء":"Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();

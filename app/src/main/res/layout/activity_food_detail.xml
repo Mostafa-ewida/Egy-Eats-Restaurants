@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FoodDetail">
+    tools:context=".FoodDetail"
+    android:background="@android:color/black">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -93,7 +94,7 @@
                     app:backGroundColor="@color/colorAccent"
                     android:textAlignment="center"
                     app:finalNumber="100"
-                    app:initialNumber="0"/>
+                    app:initialNumber="1"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -102,20 +103,21 @@
             android:layout_height="65dp">
 
             <Button
-                android:id="@+id/food_detail_add_button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/bottom_left_bg"
-                android:text="Add" />
-
-            <Button
                 android:id="@+id/food_detail_cancel_button"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/bottom_right_bg"
+                android:background="@drawable/bottom_left_bg"
                 android:text="Cancel" />
+
+            <Button
+                android:id="@+id/food_detail_add_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bottom_right_bg"
+                android:text="Add" />
+
         </LinearLayout>
 
     </LinearLayout>

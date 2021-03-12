@@ -89,4 +89,13 @@ public class FoodDetail extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent foodListReload = new Intent(FoodDetail.this, FoodList.class);
+        foodListReload.putExtra("Category", category);
+        startActivity(foodListReload);
+        finish();
+    }
 }

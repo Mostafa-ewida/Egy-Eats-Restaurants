@@ -30,6 +30,7 @@ import retrofit2.Response;
 public class OrderStatus extends AppCompatActivity {
 
     Button order_status_button_back;
+    Button order_status_refresh;
     Button profile_button;
     Button cart_button;
     RecyclerView order_status_recycler;
@@ -44,6 +45,7 @@ public class OrderStatus extends AppCompatActivity {
         setContentView(R.layout.activity_order_status);
 
         order_status_button_back = findViewById(R.id.order_status_button_back);
+        order_status_refresh = findViewById(R.id.order_status_refresh);
         profile_button = findViewById(R.id.profile_button);
         cart_button = findViewById(R.id.cart_button);
 
@@ -60,6 +62,14 @@ public class OrderStatus extends AppCompatActivity {
                 mainIntentCart.putExtra("tabID", "2");
                 startActivity(mainIntentCart);
                 finish();
+            }
+        });
+
+        order_status_refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadOrderStatus();
+                orderStatusAdapter.notifyDataSetChanged();
             }
         });
 
@@ -94,7 +104,7 @@ public class OrderStatus extends AppCompatActivity {
             apiService = ApiClientBasicAuth.createService(ApiInterface.class, Common.currentUser.getUsername(), Common.currentUser.getPassword());
         }
 
-        Call<List<Request>> call = apiService.getOrder(Common.androidId);
+        Call<List<Request>> call = apiService.getOrder(Common.androidId, Long.parseLong(Common.tableId));
         call.enqueue(new Callback<List<Request>>() {
             @Override
             public void onResponse(Call<List<Request>> call, Response<List<Request>> response) {

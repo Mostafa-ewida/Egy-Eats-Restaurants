@@ -34,8 +34,9 @@ public interface ApiInterface {
     @POST("misc/auth")
     Call<EndUser> signIn(@Body EndUser endUser);
 
+    //Get tableID
     @Headers({"Accept: application/json"})
-    @GET("misc/userorders/{deviceId}")
-    Call<List<Request>> getOrder(@Path("deviceId") String deviceId);
+    @GET("misc/userorders/{deviceId}/{tableId}")
+    Call<List<Request>> getOrder(@Path("deviceId") String deviceId, @Path("tableId") long id);
 
 }

@@ -95,7 +95,9 @@ public class FoodList extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         Intent mainReload = new Intent(FoodList.this, MainActivity.class);
+        mainReload.putExtra("tabID", "2");
         startActivity(mainReload);
+        finish();
     }
 
     private void loadFoodList(long categoryID) {

@@ -45,9 +45,10 @@ public class CartViewAdapter extends RecyclerView.Adapter<CartViewAdapter.CartVi
     @Override
     public void onBindViewHolder(@NonNull CartViewAdapter.CartViewHolder holder, int position) {
         holder.food_name.setText(listData.get(position).getName());
+        holder.food_number.setText(String.valueOf(listData.get(position).getQuantity()));
         double price = listData.get(position).getPrice()* listData.get(position).getQuantity();
         NumberFormat fmt = NumberFormat.getCurrencyInstance(Common.appLocale);
-        holder.food_price.setText(fmt.format(price));
+        holder.food_price.setText(String.valueOf(price));
         holder.food_name.setText(listData.get(position).getName());
         holder.delete_card.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +73,7 @@ public class CartViewAdapter extends RecyclerView.Adapter<CartViewAdapter.CartVi
 
     public class CartViewHolder<ItemClickListener> extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        public TextView food_name, food_price, food_desc;
+        public TextView food_name, food_price, food_desc, food_number;
         public Button delete_card;
 
         private ItemClickListener itemClickListener;
@@ -83,6 +84,7 @@ public class CartViewAdapter extends RecyclerView.Adapter<CartViewAdapter.CartVi
             food_price = itemView.findViewById(R.id.food_price);
             food_desc = itemView.findViewById(R.id.food_desc);
             delete_card = itemView.findViewById(R.id.delete_card);
+            food_number = itemView.findViewById(R.id.food_number);
         }
 
         @Override

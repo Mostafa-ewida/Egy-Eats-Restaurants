@@ -22,8 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
             android:fontFamily="@font/poppins_bold"
             android:text=""
             android:textColor="@android:color/black"
@@ -60,34 +60,36 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
-            android:background="@drawable/text_view_bg">
+            android:background="@drawable/text_view_bg"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="2"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_weight="2"
                 android:fontFamily="@font/poppins"
                 android:text="Added to cart"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
+
             <Button
                 android:id="@+id/remove_all_cards"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_weight="1"
                 android:fontFamily="@font/poppins"
-                android:text="remove all?"
+                android:text="@string/remove_all"
                 android:textColor="@color/colorAccent"
-                style="?android:attr/borderlessButtonStyle"
-                android:textSize="10sp" />
+                android:textSize="12sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
 
@@ -97,10 +99,34 @@
         android:id="@+id/card_recycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttons_linear"
+        app:layout_constraintBottom_toTopOf="@+id/service_tax_linear"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linear_intro" />
+
+    <LinearLayout
+        android:id="@+id/service_tax_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/buttons_linear"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/poppins"
+            android:text="*Please note that all Prices doesn't include Tax or Service"
+            android:textColor="@android:color/black"
+            android:textSize="10sp" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/buttons_linear"

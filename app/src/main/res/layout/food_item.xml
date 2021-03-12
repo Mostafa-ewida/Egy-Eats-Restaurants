@@ -125,7 +125,8 @@
                         app:backGroundColor="@color/colorAccent"
                         android:textAlignment="center"
                         app:finalNumber="100"
-                        app:initialNumber="0"/>
+                        app:initialNumber="0"
+                        android:visibility="invisible"/>
                 </LinearLayout>
 
             </LinearLayout>

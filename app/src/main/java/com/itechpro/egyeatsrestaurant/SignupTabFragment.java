@@ -23,6 +23,8 @@ import com.itechpro.egyeatsrestaurant.Retrofit.ApiInterface;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,7 +33,7 @@ import retrofit2.Response;
 public class SignupTabFragment extends Fragment {
 
     EditText signup_mobile_number, signup_password, signup_password_confirm, signup_name;
-    TextView errorResponse;
+    TextView errorResponse, error_password;
     Button signup_button, signup_guest;
     ApiInterface apiInterface;
     SharedPreferences encPref;
@@ -50,6 +52,7 @@ public class SignupTabFragment extends Fragment {
         signup_guest = root.findViewById(R.id.signup_guest);
 
         errorResponse = root.findViewById(R.id.error_response);
+        error_password = root.findViewById(R.id.error_password);
 
         signup_button = root.findViewById(R.id.signup_button);
 
@@ -95,8 +98,19 @@ public class SignupTabFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (Common.isConnectedToInternet(getContext())) {
-                    signUpAPI();
-                }else {
+                    if (isValidMobileNumber(signup_mobile_number.getText().toString())) {
+                        if (isValidPassword(signup_password.getText().toString())) {
+                            if (signup_password.getText().toString().equals(signup_password_confirm.getText().toString())) {
+                                signUpAPI();
+                            } else
+                                Toast.makeText(getContext(), "Password Not matching", Toast.LENGTH_SHORT).show();
+                        } else {
+                            error_password.setVisibility(View.VISIBLE);
+                        }
+                    }else {
+                        Toast.makeText(getContext(), "Please enter valid mobile number", Toast.LENGTH_LONG).show();
+                    }
+                } else {
                     Toast.makeText(getContext(), "Please check Your Connection !!", Toast.LENGTH_LONG).show();
                 }
             }
@@ -112,11 +126,63 @@ public class SignupTabFragment extends Fragment {
                 encEditor.apply();
 
                 startActivity(qrActivity);
-//            finish();
+//                finish();
             }
         });
 
         return root;
+    }
+
+    private boolean isValidMobileNumber(String mobileNumber) {
+        // Regex to check valid password.
+        String regex = "^01(?=.*[0-9]).{9}$";
+
+        // Compile the ReGex
+        Pattern p = Pattern.compile(regex);
+
+
+        // If the mobile number is empty
+        // return false
+        if (mobileNumber == null) {
+            return false;
+        }
+
+
+        // Pattern class contains matcher() method
+        // to find matching between given password
+        // and regular expression.
+        Matcher m = p.matcher(mobileNumber);
+
+
+        // Return if the password
+        // matched the ReGex
+        return m.matches();
+    }
+
+    private boolean isValidPassword(String password) {
+        // Regex to check valid password.
+        String regex = "^(?=.*[0-9])"
+                + "(?=.*[a-z])(?=.*[A-Z])"
+                + "(?=.*[@#$%^&+=])"
+                + "(?=\\S+$).{8,20}$";
+
+        // Compile the ReGex
+        Pattern p = Pattern.compile(regex);
+
+        // If the password is empty
+        // return false
+        if (password == null) {
+            return false;
+        }
+
+        // Pattern class contains matcher() method
+        // to find matching between given password
+        // and regular expression.
+        Matcher m = p.matcher(password);
+
+        // Return if the password
+        // matched the ReGex
+        return m.matches();
     }
 
     private void signUpAPI() {
@@ -124,7 +190,7 @@ public class SignupTabFragment extends Fragment {
         apiInterface.signUp(endUser).enqueue(new Callback<EndUser>() {
             @Override
             public void onResponse(Call<EndUser> call, Response<EndUser> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     Log.i("Sign UP result:", response.body().toString());
                     encEditor.putString("username", endUser.getUsername());
                     encEditor.commit();
@@ -136,9 +202,9 @@ public class SignupTabFragment extends Fragment {
                     Common.currentUser = new EndUser(endUser.getUsername(), endUser.getDisplayName(), endUser.getPassword());
                     startActivity(homeIntent);
                     getActivity().finish();
-                }else {
+                } else {
                     Toast.makeText(getContext(), "Please Try Again !", Toast.LENGTH_LONG).show();
-                    switch (response.code()){
+                    switch (response.code()) {
                         case 401:
                             errorResponse.setText("Invalid Username or Password !!");
                             break;

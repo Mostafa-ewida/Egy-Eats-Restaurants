@@ -40,9 +40,39 @@ public class OrderStatusAdapter extends RecyclerView.Adapter<OrderStatusAdapter.
     @Override
     public void onBindViewHolder(@NonNull RequestViewHolder holder, int position) {
         holder.no_of_people.setText("No of People being served: " + listData.get(position).getPersonsCount());
-        holder.order_status.setText("Order Status: " + listData.get(position).getOrderStatus());
+        holder.order_status.setText("Order Status: " + getOrderStatus(listData.get(position).getOrderStatus()));
         holder.order_id.setText("Order ID: " + listData.get(position).getId());
         holder.total_cost.setText("Total Cost: " + listData.get(position).getTotalCost());
+    }
+
+    private String getOrderStatus(String status) {
+        String returned_status;
+        switch (status){
+            case "PLACED": returned_status="Placed";
+            break;
+            case "PENDING": returned_status="Waiting for Restaurant";
+            break;
+            case "CANCELED": returned_status="Canceld by Restaurant";
+            break;
+            case "REJECTED": returned_status="Rejected by Restaurant";
+            break;
+            case "ACCEPTED": returned_status="Accepted by Restaurant";
+            break;
+            case "UNDER_PREPARATION": returned_status="Under Preparation";
+            break;
+            case "READY_FOR_DELIVERY": returned_status="Ready for Serving";
+            break;
+            case "ON_DELIVERY": returned_status="On Its Way to you!";
+            break;
+            case "SERVED": returned_status="Served";
+            break;
+            case "PAID": returned_status="Order Paid";
+            default: returned_status="waiting";
+
+        }
+
+
+        return returned_status;
     }
 
 
