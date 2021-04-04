@@ -43,7 +43,7 @@ public class FoodDetail extends AppCompatActivity {
         quantity_button = findViewById(R.id.quantity_button);
         food_detail_notes = findViewById(R.id.food_detail_notes);
 
-        //Get Intent here
+        //Get Intent Here
         if (getIntent() != null) {
             food = (Food) getIntent().getSerializableExtra("Food");
             category = (Category) getIntent().getSerializableExtra("Category");
