@@ -23,7 +23,7 @@ jobs:
     strategy:
           matrix:
             java-version: [8.x]
-            gradle-version: [4.1.1]
+            gradle-version: [6.5]
 
     steps:
     - uses: actions/checkout@v3
@@ -253,28 +253,28 @@ jobs:
         TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
-  publish-docker-image:
+  # publish-docker-image:
   
-    runs-on: ubuntu-latest
-    strategy:
-        matrix:
-          java-version: [8.x]
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #       matrix:
+  #         java-version: [8.x]
 
-    steps:
-    - uses: actions/checkout@v3
+  #   steps:
+  #   - uses: actions/checkout@v3
     
-    - name: Login to GitHub Container Registry
-      uses: docker/login-action@v3
-      with:
-        registry: ghcr.io
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+  #   - name: Login to GitHub Container Registry
+  #     uses: docker/login-action@v3
+  #     with:
+  #       registry: ghcr.io
+  #       username: ${{ github.actor }}
+  #       password: ${{ secrets.GITHUB_TOKEN }}
         
-    - name: build docker image
-      run: |
-           docker build . --tag ghcr.io/MegaDevelopment/Egy-Eats-Restaurants:latest
-           docker run ghcr.io/MegaDevelopment/Egy-Eats-Restaurants:latest
-           docker push ghcr.io/MegaDevelopment/Egy-Eats-Restaurants:latest
+  #   - name: build docker image
+  #     run: |
+  #          docker build . --tag ghcr.io/MegaDevelopment/Egy-Eats-Restaurants:latest
+  #          docker run ghcr.io/MegaDevelopment/Egy-Eats-Restaurants:latest
+  #          docker push ghcr.io/MegaDevelopment/Egy-Eats-Restaurants:latest
 
 
            
